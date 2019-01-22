@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+ShoddyAnalytica
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="/static/CSS/webapp.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<script id="post" type="text/x-handlebars-template">
+    <div class="post">
+        {% raw -%}
+            {{ contents }}
+        {%- endraw %}
+        <button class="hide">Hide</button>
+    </div>
+</script>
+
+<script src="/static/JS/TweetHandler.js"></script>
+
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+  <h1> Full Tweet Archive for: {{ Account_Name }}
+    {% for item in session.utoken[0] %}
+    <a href="/api/{{ Account_Name }}/export?token={{ item }}" class="btn btn-danger">Export!</a>
+      {% endfor %}
+    <span class="btn-group">
+
+
+
+      </div>
+    </span>
+  </h1>
+
+  <div id="posts">
+  </div>
+
+</div>
+{% endblock %}

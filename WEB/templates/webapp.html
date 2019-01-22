@@ -1,0 +1,138 @@
+{% extends "layout.html" %}
+
+{% block title %}
+ShoddyAnalytica
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="/static/CSS/webapp.css">
+<script src="/static/JS/webapp.js"></script>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+    		<!-- SA Info section -->
+    		<section id="info" class="border-bottom">
+      			<img src="/static/images/SA1.svg" class="heroimg">
+      			<h1 class="section_title">ShoddyAnalytica</h1>
+      			<p>ShoddyAnalytica provides an interactive way to explore scraped Twitter data.</p>
+      	</section>
+    		<!-- END of INFO -->
+
+    		<!-- Archive -->
+    		<section id="archive" class="border-bottom">
+    			<h2 class="section_title">Archive</h2>
+    			<ul>
+    			<li><a href="/app/*/tweets">Chronological list of all scraped tweets</a></li>
+          <li><a href="/aclist">List of Scraped Accounts</a></li>
+      		</ul>
+      		</section>
+    		<!-- End of Archive -->
+
+
+    		<!-- Top 10 Accounts by followers -->
+    		<section id="" class="border-bottom">
+
+    			<h2 class="section_title">Account by most followers</h2>
+
+    			<div class="table-responsive">
+    				<table class="table">
+    	    			<thead>
+    	    				<tr>
+    	    				<th>Name</th>
+
+    	    				<th>Followers</th>
+
+                  <th>Link</th>
+
+    	    				</tr>
+    	    			</thead>
+    					<tbody>
+
+                  {% for item in ACLIST %}
+                  <tr>
+        						<td><a >{{ item[0] }}</a></td>
+        						<td>{{ item[1] }}</td>
+                    <td>            <a href="/app/{{ item[0] }}">
+                                <span style="color: #CC0841;">
+                                  <i class="fas fa-brain"></i>
+                                </span>
+                                </a></td>
+                    </tr>
+                  {% endfor %}
+
+
+    											</tbody>
+    				</table>
+    			</div>
+
+    		</section>
+    		<!-- End of top 10 Accounts by followers -->
+    </div>
+    <div class="col-xs-12 col-sm-4">
+
+		<section id="top_tweets" class="border-left border-right border-bottom">
+			<h2 class="section_title">Top Tweets Of All time</h2>
+      {% for item in TOP3 %}
+      <div id="toptweet">
+        {{ item }}
+
+      </div>
+      {% endfor %}
+
+		</section>
+
+		<section id="latest_tweets" class="border-left border-right">
+			<h2 class="section_title">Recent Tweets:</h2>
+
+      {% for item in RECENT3 %}
+      <div id="recent">
+        {{ item }}
+      </div>
+      {% endfor %}
+
+
+			<a class="newsfeed_link" href="/app/*/tweets">See more tweets</a>
+
+		</section>
+
+	</div>
+
+	<div class="col-xs-12 col-sm-4">
+
+		<div class="container-fluid">
+			<div class="row">
+
+				<section id="daily_stats" class="border-bottom">
+
+					<h2 class="section_title">Basic Information</h2>
+          <p> CPU load: {{ CPU }} </p>
+          <p> Mem load: {{ MEM }} </p>
+          <p> Registered Users: {{ UserTot}} </p>
+          <p> Total Tweets: {{ TweetTot }} </p>
+          <p> Scraped Twitter Accounts: {{ AuthorTot }} </p>
+          <p> Number of Datapoints: {{ DataTot }}</p>
+	  		</section>
+
+		  		<section class="border-bottom">
+			  		<h2 class="section_title">Random Featured</h2>
+            <div id=random>
+              {{ RANDOM }}
+            </div>
+
+					<div class="col-sm-6">
+          </div>
+
+				</section>
+
+
+
+    </div>
+  </div>
+</div>
+{% endblock %}

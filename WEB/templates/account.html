@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Shoddy AAM
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+
+
+{% block body %}
+<div class="container">
+    <h1> Account Management</h1>
+    <h4> Welcome {{ FirstName }} You have {{ Credits }} Credits</h4>
+    <h6> <a href= {{ url_for('scraper') }}> /// Request an account to be scraped</h6>
+    <h6> <a href= {{ url_for('forgot') }}> /// Change Password </h6>
+    <h6> <a href= {{ url_for('dashboard') }}> /// Go to app dashboard</h6>
+</div>
+
+
+{% endblock %}

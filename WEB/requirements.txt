@@ -1,13 +1,9 @@
 Flask
-flask_session
+Flask-Session
 psycopg2
 SQLAlchemy
 werkzeug.security
-passlib.hash
 ItsDangerous==0.24
 TextBlob
 Tensorflow
 Twint
-collections
-secrets
-psutil

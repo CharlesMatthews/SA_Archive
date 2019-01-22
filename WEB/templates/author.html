@@ -1,0 +1,131 @@
+{% extends "layout.html" %}
+
+{% block title %}
+SA Author
+{% endblock %}
+
+{% block scripts %}
+<link href="https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day|Raleway:900" rel="stylesheet">
+<link rel="stylesheet" href="/static/CSS/webapp.css">
+<script src="/static/JS/webapp.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<script id="post" type="text/x-handlebars-template">
+    <div class="post">
+        {% raw -%}
+            {{ contents }}
+        {%- endraw %}
+        <button class="hide">Hide</button>
+    </div>
+</script>
+{% endblock %}
+
+
+
+{% block body %}
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-4">
+      <!-- SA Info section -->
+      <section id="info" class="border-bottom">
+        <img id=info_logo src="{{ data[10] }}" class="d-inline-block align-top heroimg" alt="" href="">
+        <a id="name" class="section_title" style="font-family:'Raleway', Black; sans-serif; font-size: 400%;">{{ data[1] }}</a>
+        <a id="handle" style="font-family: 'Dawning of a New Day', cursive; font-size: 200%;">{{ data[2] }}</a>
+      </section>
+      <!-- END of INFO -->
+
+      <!-- Archive -->
+      <section id="archive" class="border-bottom">
+        <h2 class="section_title">Archive</h2>
+        <ul>
+        <li><a href="{{ data[2] }}/tweets">Chronological list of {{ data[1] }}'s tweets</a></li>
+        </ul>
+        </section>
+      <!-- End of Archive -->
+
+      <section class="border-bottom">
+
+        <section class="border-bottom">
+          <h2 class="section_title">Random Featured</h2>
+          {% for item in RANDOM %}
+          <div id="recent">
+            {{ item }}
+          </div>
+          {% endfor %}
+
+
+      </section>
+
+  </div>
+  <div class="col-xs-12 col-sm-4">
+
+  <section id="top_tweets" class="border-left border-right border-bottom">
+    <h2 class="section_title">Top Tweets Of All time</h2>
+    {% for item in TOP3 %}
+    <div id="toptweet">
+      {{ item }}
+
+    </div>
+    {% endfor %}
+  </section>
+
+  <section id="latest_tweets" class="border-left border-right">
+    <h2 class="section_title">Recent Tweets:</h2>
+    {% for item in RECENT3 %}
+    <div id="recent">
+      {{ item }}
+    </div>
+    {% endfor %}
+
+
+
+    <a class="newsfeed_link" href="{{ data[2] }}/tweets">See more tweets</a>
+
+  </section>
+
+</div>
+
+<div class="col-xs-12 col-sm-4">
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <section class="border-bottom">
+
+        <h2 class="section_title">Basic Information</h2>
+
+        <h3>Bio: </h3><a>{{ data[3] }}
+        <h3>Twitter Account ID: </h3><a>{{ data[0] }}</a>
+        <h3>Followers: </h3><a>{{ data[4] }} </a>
+        <h3>Following: </h3><a>{{ data[5] }} </a>
+        <h3>Tweets with Media: </h3><a>{{ data[6] }} </a>
+        <h3>Verified: </h3><a>{{ data[7] }} </a>
+        <h3>Private: </h3><a>{{ data[8] }} </a>
+        <h3>Join Date and Time: </h3><a>{{ data[9] }} </a>
+
+      </section>
+
+
+
+    {% if trained %}
+    <section class="border-bottom">
+        <h2 class="section_title">NN output</h2>
+        {% for item in session.utoken[0] %}
+        <iframe src="/api/neuralnet?token={{ item }}"></iframe>
+        {% endfor %}
+
+
+    </section>
+    {% endif %}
+
+
+
+  </div>
+</div>
+
+</div>
+
+
+
+{% endblock %}

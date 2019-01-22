@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+User Registration
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="/static/CSS/login.css">
+<script type="text/javascript" src="/static/JS/register.js"></script>
+{% endblock %}
+
+{% if error %}
+<div class="alert alert-danger">
+    <strong>Error:</strong> {{ error }}
+</div>
+{% endif %}
+
+{% block body %}
+<div class="container">
+
+  {% if not logged_in %}
+      <h1>Sign up for an account</h1>
+      <form action="{{ url_for('register') }}" method="post">
+          <div class="form-group">
+            <input class="form-control" name="Email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <input class="form-control" input type="text" name="Fname" placeholder="First Name">
+          </div>
+          <div class="form-group">
+            <input class="form-control" input type="text" name="Lname" placeholder="Last Name">
+          </div>
+          <div class="form-group">
+            <input class="form-control" input type="password" name="Password" placeholder="Password">
+          </div>
+            <div class="form-group">
+                <button class="btn btn-primary">Signup</button>
+            </div>
+      </form>
+
+
+      <h5>
+        <a href="{{ url_for('login') }}">
+           Returning user? - Login here
+        </a>
+      </h5>
+  {% else %}
+  <div class="alert alert-warning">
+      <strong>Warning!</strong> You are already logged in. Please log out before creating a new account.
+  </div>
+
+  <h1>
+    <a href="{{ url_for('account') }}">
+       MemberArea
+    </a>
+  </h1>
+  {% endif %}
+      <h6>
+        <a href="{{ url_for('index') }}">
+           Back Home
+        </a>
+      </h6>
+</div>
+
+
+{% endblock %}
